@@ -1,5 +1,28 @@
+----Using northwind Database---- created a new set of tables *OrederNew (by Orders) *[OrderDetails New] (by [Order Details])
+
+--Creating a procedure that receives a number and enters new orders into OrederNew table.
+--For each new order , a new set of rows (3-15 randomly) will be added to OrderDetails New.
+
+---Under OrederNew table:
+--The order number will continue to run as usual (+1)
+--Random customer ID (will be taken from Customers table)
+--Random employee ID (will be taken from Employees table)
+--The order date will be between 1997 and 2001 (randomly)
+--Demand date between 3-5 days after the order date
+--Delivery date between 3-15 days after the order date
+--ShipAddress according to the customer's address (will be taken from Customers table)
+
+---Under OrderDetails New table:
+--The order number will be taken from the OrederNew table
+--Random product ID (will be taken from Order Details table)
+--The price will be the price of the product (will be taken from Order Details table)
+--Quantity between 1 and 50 (randomly)
+--Discount between 0 and 0.25, 2 digits after the point (randomly)
+
+
 create procedure spNewOreders (@numofrows int =0)
 as
+
 declare @I int
 declare @orderid int
 declare @Empid int
@@ -59,7 +82,6 @@ begin
 
  exec spNewOreders @numofrows= 2
 
-select * from OrdersNew
-select * from [OrderDetails new]
+
 
 
