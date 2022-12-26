@@ -1,9 +1,9 @@
-----Using northwind Database---- created a new set of tables *OrederNew (by Orders) *[OrderDetails New] (by [Order Details])
+----Using northwind Database---- created a new set of tables *OredersNew (by Orders) *[OrderDetails New] (by [Order Details])
 
 --Creating a procedure that receives a number and enters new orders into OrederNew table.
 --For each new order , a new set of rows (3-15 randomly) will be added to OrderDetails New.
 
----Under OrederNew table:
+---Under OredersNew table:
 --The order number will continue to run as usual (+1)
 --Random customer ID (will be taken from Customers table)
 --Random employee ID (will be taken from Employees table)
@@ -13,7 +13,7 @@
 --ShipAddress according to the customer's address (will be taken from Customers table)
 
 ---Under OrderDetails New table:
---The order number will be taken from the OrederNew table
+--The order number will be taken from the OredersNew table
 --Random product ID (will be taken from Order Details table)
 --The price will be the price of the product (will be taken from Order Details table)
 --Quantity between 1 and 50 (randomly)
@@ -41,7 +41,7 @@ begin
  set @orderid= (select( max(OrderID)+1) from OrdersNew)
  set @Empid = (select top 1 EmployeeID from Employees order by NEWID())
  set @custid = (select top 1 CustomerID from Customers order by NEWID())
- set @orderdate= (select dateadd(day,(rand()*(1+datediff(day,@startdate, @enddate))),@startdate))
+ set @orderdate= (select dateadd(day, rand(CHECKSUM(NEWID()))*(1+datediff(day, @StartDate, @EndDate)),@StartDate))
  set @reqday= (select dateadd(day,(rand()*(5-3)+3),@orderdate))
  set @shipday = (select dateadd(day,(rand()*(15-3)+3),@orderdate))
  set @shipaddr= (select Address from Customers where CustomerID=@custid )
