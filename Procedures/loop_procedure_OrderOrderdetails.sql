@@ -80,6 +80,7 @@ begin
  
 
 
+for example- enter 2 new orders
  exec spNewOreders @numofrows= 2
 
 
